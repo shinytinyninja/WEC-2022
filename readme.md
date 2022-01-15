@@ -16,3 +16,11 @@ Hi,
 
 ## Daniel Bianca
 - 3rd year Engineer
+
+
+# Program Methods
+## Main.py()
+
+
+
+## PopulateMatrix.py()

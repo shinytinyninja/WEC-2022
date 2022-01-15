@@ -1,4 +1,5 @@
 import tkinter as tk
+import PopulateMatrix
 
 def main():
     print("starting carnival Routing")
@@ -10,6 +11,9 @@ def main():
         height=20,
         bg="purple",
         )
+    
+    matrix = PopulateMatrix()
+    
     label.pack()
     window.mainloop()
     
