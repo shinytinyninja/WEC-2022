@@ -1,9 +1,8 @@
-from pickle import FALSE
-from CarnivalObject import CarnivalObject
-from random import randint
 import json
-
-    # Reading objects from JSON File
+from CarnivalObject import CarnivalObject
+import collections
+from random import randint
+# Reading objects from JSON File
 with open("CarnivalSetup.json") as file:
     data = json.load(file)
 
@@ -57,3 +56,37 @@ for i in range(0, boardHeight):
     print(line)
     
 
+# start = ()
+# end = ()
+# pitStops = []
+
+# attractDict = {}
+wall = []
+# #find Location of Attractions
+# for row in range(len(tempMatrix)):
+#     for colom in range(len(tempMatrix[0])):
+#         if (tempMatrix[row][colom].getObjectName() != "path"):
+#             attractDict[tempMatrix[row][colom].getObjectName()] = (row, colom)    
+#             wall.append((row,colom))      
+
+start = (0,0)
+
+matrixHeight = len(tempMatrix)
+matrixWidth = len(tempMatrix[0])
+
+queue = collections.deque([[start]])
+seen = set([start])
+while queue:
+    print("Enter")
+    path = queue.popleft()
+    x, y = path[-1]
+    if tempMatrix[y][x].getObjectName() == "kidCoaster":
+        print("SUSUSUSUUSs")
+        print(path)
+        exit(0)
+    for x2, y2 in ((x+1,y), (x-1,y), (x,y+1), (x,y-1)):
+        if 0 <= x2 < matrixWidth and 0 <= y2 < matrixHeight and tempMatrix[y2][x2] != wall and (x2, y2) not in seen:
+            queue.append(path + [(x2, y2)])
+            seen.add((x2, y2))
+            
+print("end")
