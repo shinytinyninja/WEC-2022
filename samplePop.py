@@ -1,7 +1,7 @@
 from CarnivalObject import CarnivalObject
 from random import randint
 import json
-import numpy as np
+
 w, h = 10 ,10
 tempMatrix = [[0 for x in range(w)] for y in range(h)]
 
@@ -37,7 +37,7 @@ for attractionNum in range(0, len(data["Attractions"])):
             for h in range(0, objectHeight):
                 for w in range(0, objectWidth):
                     if ((tempMatrix[rowValue + h][colomValue + w].getObjectName() != "path")):
-                        errorInsert = False          
+                        canInsert = False          
         else:
             canInsert = False
 
@@ -50,7 +50,6 @@ for attractionNum in range(0, len(data["Attractions"])):
                     tempMatrix[h][w].setObjectColor(
                         data["Attractions"][attractionNum]["color"])
             
-
 for i in range(0, 10):
     print("\n")
     
