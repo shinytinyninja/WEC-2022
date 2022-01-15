@@ -1,6 +1,7 @@
 import tkinter as tk
 import json
 from PopulateMatrix import PopulateMatrix
+from PathFinder import PathFinder
 
 def main():
     print("starting carnival Routing")
@@ -76,9 +77,23 @@ def main():
             newFrame = tk.Frame(botFrame)
             newFrame.pack(side = "top")
             for currWidth in range(0, matrixWidth):
-                attractionObject = tk.Label(newFrame, text = ourMatrix[currHeight][currWidth].getObjectName(), bg = ourMatrix[currHeight][currWidth].getObjectColor(), height=3, width=15)
+                attractionObject = tk.Label(newFrame, text = ourMatrix[currHeight][currWidth].getObjectName() + " " + str(currHeight) + " " + str(currWidth) , bg = ourMatrix[currHeight][currWidth].getObjectColor(), height=3, width=15)
                 attractionObject.pack(side ="left")
                 print(ourMatrix[currHeight][currWidth].getObjectName())
+
+        def calculateClick():
+            answer = PathFinder(allStops, ourMatrix)
+            print(answer)
+            answerFrame = tk.Frame(botFrame)
+            answerFrame.pack(side = "bottom")
+            answerLabel = tk.Label(answerFrame, text=answer)
+            answerLabel.pack()
+
+        calculateRoute = tk.Button(topFrame, text="Calculate Route", activebackground = "blue", command = calculateClick)
+        calculateRoute.pack(side = "top")
+        
+
+
     window.mainloop()
 
 if __name__ == "__main__":

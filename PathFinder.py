@@ -28,11 +28,11 @@ def PathFinder(pitStops, matrix):
         while queue:
             path = queue.popleft()
             x, y = path[-1]
-            if matrix[y][x].getObjectName() == pitStops[step+1]:
+            if matrix[x][y].getObjectName() == pitStops[step+1]:
                 print("Found a Path")
                 finalPath.append(path)
             for x2, y2 in ((x+1,y), (x-1,y), (x,y+1), (x,y-1)):
-                if 0 <= x2 < matrixWidth and 0 <= y2 < matrixHeight and matrix[y2][x2] != wall and (x2, y2) not in seen:
+                if 0 <= x2 < matrixWidth and 0 <= y2 < matrixHeight and matrix[x2][y2] != wall and (x2, y2) not in seen:
                     queue.append(path + [(x2, y2)])
                     seen.add((x2, y2))
     
