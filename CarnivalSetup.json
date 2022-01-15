@@ -1,60 +1,52 @@
 {
-    "Attractions": [
-        {
-            "name": "ferrisWheel",
-            "height": 2,
-            "width": 2,
-            "color":"#FF0000"
-        },
-        {
-            "name": "bathroom",
-            "height": 2,
-            "width": 2,
-            "color":"#ADD8E6"
-        },
-        {
-            "name": "bigRollerCoaster",
-            "height": 2,
-            "width": 2,
-            "color":"#FFA500"
-        },
-        {
-            "name": "smallCoaster",
-            "height": 2,
-            "width": 2,
-            "color":"#A020F0"
-        },
-        {
-            "name": "kidCoaster",
-            "height": 2,
-            "width": 2,
-            "color":"#90ee90"
-        },
-        {
-            "name": "bumperCars",
-            "height": 2,
-            "width": 2,
-            "color":"#FFFFFF"
-        },
-        {
-            "name": "popcornStand",
-            "height": 2,
-            "width": 2,
-            "color":"#FFFF00"
-        },
-        {
-            "name": "pizzaStand",
-            "height": 2,
-            "width": 2,
-            "color":"#f2ba49"
-        }
-    ]
+  "Attractions": [
+    {
+      "name": "ferrisWheel",
+      "height": 2,
+      "width": 2,
+      "color": "#FF0000"
+    },
+    {
+      "name": "bathroom",
+      "height": 2,
+      "width": 2,
+      "color": "#ADD8E6"
+    },
+    {
+      "name": "bigRollerCoaster",
+      "height": 2,
+      "width": 2,
+      "color": "#FFA500"
+    },
+    {
+      "name": "smallCoaster",
+      "height": 2,
+      "width": 2,
+      "color": "#A020F0"
+    },
+    {
+      "name": "kidCoaster",
+      "height": 2,
+      "width": 2,
+      "color": "#90ee90"
+    },
+    {
+      "name": "bumperCars",
+      "height": 2,
+      "width": 2,
+      "color": "#FFFFFF"
+    },
+    {
+      "name": "popcornStand",
+      "height": 2,
+      "width": 2,
+      "color": "#FFFF00"
+    },
+    {
+      "name": "pizzaStand",
+      "height": 2,
+      "width": 2,
+      "color": "#f2ba49"
+    }
+  ]
 }
-
- 
-
-
-
-
-
-
