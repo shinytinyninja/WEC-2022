@@ -1,13 +1,13 @@
 import tkinter as tk
 import json
-import PopulateMatrix
+from PopulateMatrix import PopulateMatrix
 
 def main():
     print("starting carnival Routing")
     # main GUI window
     window = tk.Tk()
     # GUI Window initial size
-    window.geometry("400x400")
+    window.geometry("900x900")
 
     # create necessary frames for buttons and matrix output
     topFrame = tk.Frame(window)
@@ -17,7 +17,7 @@ def main():
     botFrame.pack(side = "bottom")
 
     # top label
-    header = tk.Label(topFrame, text = "WEC Carnival Grounds", font=(512))
+    header = tk.Label(topFrame, text = "WEC Carnival Grounds", font=(112))
     header.pack(side ="top")
 
     info = tk.Label(topFrame, text = "The first stop added is the start point. The last stop added is the end point.")
@@ -26,17 +26,36 @@ def main():
     info2.pack(side ="top")
 
     # drop down menu for start point, stops and end point
-    myAttractions = ["bathroom", "ferrisWheel", "bigRollerCoaster", "smallCoaster", "kidCoaster", "bumperCars", "popcornStand", "pizzaStand"]
-    variable = tk.StringVar(topFrame)
-    variable.set("Choose a stop to add") # set default value
-    dropDown = tk.OptionMenu(topFrame, variable, *myAttractions)
-    dropDown.pack(side = "bottom")
+    # myAttractions = ["bathroom", "ferrisWheel", "bigRollerCoaster", "smallCoaster", "kidCoaster", "bumperCars", "popcornStand", "pizzaStand"]
+    with open("CarnivalSetup.json") as file:
+        data = json.load(file)
+        attractionList = []
+        for i in range(0, len(data["Attractions"])):
+            attractionList.append(data["Attractions"][i]["name"])
+         
+        variable = tk.StringVar(topFrame)
+        variable.set("Choose a stop to add") # set default value
+        dropDown = tk.OptionMenu(topFrame, variable, *attractionList)
+        dropDown.pack(side = "bottom")
 
     myStops = []
+    allStops = []
     # add a stop to the array for the path chosen
     def addStopClick():
-        myStops.append(variable.get())
-        print(myStops)
+        # count = 0
+        myStops=variable.get()
+        allStops.append(variable.get())
+        notAppend = True
+        currStops = tk.Label(topFrame, text=myStops, bg="blue")
+        if notAppend==True:
+            currStops = tk.Label(topFrame, text=myStops, bg="blue")
+            currStops.pack(side = "left")
+            notAppend = False
+        else:
+            currStops.configure(text=myStops)
+
+        print(allStops)
+        
 
     # add a stop button
     addStop = tk.Button(topFrame, text="Add a Stop", activebackground = "blue", command = addStopClick)
@@ -45,9 +64,21 @@ def main():
     # printing the table 
     with open("CarnivalSetup.json") as file:
         data = json.load(file)
-        print(data["Board"]["Height"])
-        print(data["Board"]["Width"])
+        matrixHeight = data["Board"]["height"]
+        matrixWidth = data["Board"]["width"]
+        print(matrixHeight)
+        print(matrixWidth)
 
+        ourMatrix = PopulateMatrix()
+
+        
+        for currHeight in range(0, matrixHeight):
+            newFrame = tk.Frame(botFrame)
+            newFrame.pack(side = "top")
+            for currWidth in range(0, matrixWidth):
+                attractionObject = tk.Label(newFrame, text = ourMatrix[currHeight][currWidth].getObjectName(), bg = ourMatrix[currHeight][currWidth].getObjectColor(), height=3, width=15)
+                attractionObject.pack(side ="left")
+                print(ourMatrix[currHeight][currWidth].getObjectName())
     window.mainloop()
 
 if __name__ == "__main__":

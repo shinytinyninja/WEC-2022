@@ -3,7 +3,7 @@ from CarnivalObject import CarnivalObject
 from random import randint
 import json
 
-# PopulateMatrix Function will return a 10x10 matrix
+# PopulateMatrix Function will return a variable matrix
 # populated with CarnivalObject Objects
 
 
@@ -60,4 +60,5 @@ def PopulateMatrix():
             # print(tempMatrix[i][j].getObjectName())
             line = line + tempMatrix[i][j].getObjectName() + " "
         print(line)
-        
+
+    return tempMatrix
