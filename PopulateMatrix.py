@@ -6,7 +6,6 @@ import json
 # PopulateMatrix Function will return a variable matrix
 # populated with CarnivalObject Objects
 
-
 def PopulateMatrix():
     # Reading objects from JSON File
     with open("CarnivalSetup.json") as file:
@@ -60,5 +59,5 @@ def PopulateMatrix():
             # print(tempMatrix[i][j].getObjectName())
             line = line + tempMatrix[i][j].getObjectName() + " "
         print(line)
-
+        
     return tempMatrix

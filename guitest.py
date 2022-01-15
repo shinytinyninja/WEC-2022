@@ -1,37 +1,65 @@
-import tkinter
-  
-# Create the default window
-root = tkinter.Tk()
-root.title("Welcome to GeeksForGeeks")
-root.geometry('700x500')
-  
-# Create the list of options
-options_list = ["Option 1", "Option 2", "Option 3", "Option 4"]
-  
-# Variable to keep track of the option
-# selected in OptionMenu
-value_inside = tkinter.StringVar(root)
-  
-# Set the default value of the variable
-value_inside.set("Select an Option")
-  
-# Create the optionmenu widget and passing 
-# the options_list and value_inside to it.
-question_menu = tkinter.OptionMenu(root, value_inside, *options_list)
-question_menu.pack()
-  
-# Function to print the submitted option-- testing purpose
-  
-  
-def print_answers():
-    print("Selected Option: {}".format(value_inside.get()))
-    return None
-  
-  
-# Submit button
-# Whenever we click the submit button, our submitted
-# option is printed ---Testing purpose
-submit_button = tkinter.Button(root, text='Submit', command=print_answers)
-submit_button.pack()
-  
-root.mainloop()
+import json
+from CarnivalObject import CarnivalObject
+from random import randint
+
+# Reading objects from JSON File
+with open("CarnivalSetup.json") as file:
+    data = json.load(file)
+
+boardWidth, boardHeight = data["Board"]["height"], data["Board"]["width"]
+tempMatrix = [[0 for x in range(boardWidth)] for y in range(boardHeight)]
+
+# Making every block a path
+for row in range(0, boardHeight):
+    for coloms in range(0, boardWidth):
+        tempMatrix[row][coloms] = CarnivalObject("path", "#964B00")
+
+# Placing Objects
+for attractionNum in range(len(data["Attractions"])):
+    print("\n attractionNum: {}".format(attractionNum))
+    print(data["Attractions"][attractionNum]["name"])
+
+    canInsert = False
+    while (not canInsert):
+        print("run Loop")
+        rowValue = randint(0, boardHeight - 1)
+        colomValue = randint(0, boardWidth - 1)
+        print("rowValue: {}".format(rowValue))
+        print("colomValue: {}".format(colomValue))
+
+        objectHeight = data["Attractions"][attractionNum]["height"]
+        objectWidth = data["Attractions"][attractionNum]["width"]
+
+        canInsert = True
+        if((rowValue + objectHeight < boardHeight) and (colomValue + objectWidth < boardWidth)):
+            for h in range(0, objectHeight):
+                for w in range(0, objectWidth):
+                    if ((tempMatrix[rowValue + h][colomValue + w].getObjectName() != "path")):
+                        canInsert = False
+        else:
+            canInsert = False
+
+        if (canInsert == True):
+            for h in range(rowValue, rowValue + objectHeight):
+                for w in range(colomValue, colomValue + objectWidth):
+                    tempMatrix[h][w].setObjectName(
+                        data["Attractions"][attractionNum]["name"])
+                    tempMatrix[h][w].setObjectColor(
+                        data["Attractions"][attractionNum]["color"])
+
+for i in range(0, boardHeight):
+    print("\n")
+    line = ""
+    for j in range(0, boardWidth):
+        # print(tempMatrix[i][j].getObjectName())
+        line = line + tempMatrix[i][j].getObjectName() + " "
+    print(line)
+
+attractDict = {}    
+     
+for row in range(len(tempMatrix)):
+        for colom in range(len(tempMatrix[0])):
+            if (tempMatrix[row][colom].getObjectName() != "path"):
+                attractDict[tempMatrix[row][colom].getObjectName()] = (row, colom)
+                
+print(attractDict)
